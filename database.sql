@@ -55,3 +55,43 @@ VALUES
 ('Science Fiction'),
 ('Space-Opera'),
 ('Superhero');
+
+--create junction table between movies and genres
+CREATE TABLE "movies_genres"
+(
+  "id" SERIAL PRIMARY KEY,
+  "movies_id" INT REFERENCES "movies",
+  "genres_id" INT REFERENCES "genres"
+);
+
+--insert data into junction table
+INSERT INTO "movies_genres"
+  ("movies_id", "genres_id")
+VALUES
+  (1, 1),
+  (1, 7),
+  (2, 9),
+  (2, 6),
+  (3, 1),
+  (3, 11),
+  (4, 2),
+  (4, 4),
+  (5, 1),
+  (5, 6),
+  (6, 8),
+  (6, 7),
+  (7, 1),
+  (7, 10),
+  (8, 5),
+  (8, 1),
+  (9, 13),
+  (9, 3),
+  (10, 12),
+  (10, 8),
+  (11, 11),
+  (11, 3),
+  (12, 3),
+  (13, 5),
+  (13, 10),
+  (14, 2),
+  (14, 10);
