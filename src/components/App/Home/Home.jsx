@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class Home extends Component {
 
     componentDidMount() {
         console.log('component mount log');
         this.getMovies();
-        
+
     }
 
     //dispatch to saga to call for movies
@@ -15,9 +15,14 @@ class Home extends Component {
             type: 'GET_MOVIES'
         })
     }
-
-    movieClickHandler = () => {
+    //on clicking the poster, user is sent to the details page for each movie
+    movieClickHandler = (id) => {
         console.log('in movie click handler')
+        this.props.dispatch({
+            type: 'GET_DETAILS',
+            payload: id
+        })
+        this.props.history.push(`/details/${id}`)
     }
 
     render() {
@@ -28,11 +33,12 @@ class Home extends Component {
                         <div>
                             {/* {JSON.stringify(movie)} */}
                             <h3>{movie.title}</h3>
-                            <img src={movie.poster} onClick={this.movieClickHandler} />
+                            <img src={movie.poster} onClick={() => this.movieClickHandler(movie.id)} />
                             <p>{movie.description}</p>
-                            </div>
+                        </div>
                     )
-                })}
+                })
+                }
             </div>
         );
     }
