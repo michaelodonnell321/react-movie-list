@@ -38,8 +38,7 @@ class Home extends Component {
                             <p>{movie.description}</p>
                         </div>
                     )
-                })
-                }
+                })}
             </div>
         );
     }
