@@ -18,9 +18,11 @@ function* rootSaga() {
     yield takeEvery('GET_MOVIES', getMovies)
 }
 
+//LIST OF SAGAS
+
 function* getMovies(action) {
     try {
-        let response = yield axios.get(`/movies`)
+        let response = yield axios.get(`/api/movies`)
         console.log('saga get movies response', response.data);
         yield put ({
             type: 'SET_MOVIES',
@@ -33,6 +35,9 @@ function* getMovies(action) {
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
+//////////////////////////////////////////////
+
+// REDUCERS HERE
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
     switch (action.type) {

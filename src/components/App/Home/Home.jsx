@@ -16,10 +16,23 @@ class Home extends Component {
         })
     }
 
+    movieClickHandler = () => {
+        console.log('in movie click handler')
+    }
+
     render() {
         return (
             <div>
-                <p>Hello from home</p>
+                {this.props.reduxStore.movies.map(movie => {
+                    return (
+                        <div>
+                            {/* {JSON.stringify(movie)} */}
+                            <h3>{movie.title}</h3>
+                            <img src={movie.poster} onClick={this.movieClickHandler} />
+                            <p>{movie.description}</p>
+                            </div>
+                    )
+                })}
             </div>
         );
     }
