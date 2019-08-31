@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Button} from '@material-ui/core'
 
 class Home extends Component {
 
@@ -22,7 +23,7 @@ class Home extends Component {
             type: 'GET_DETAILS',
             payload: id
         })
-        this.props.history.push(`/details/${id}`)
+        this.props.history.push(`/details/`)
     }
 
     render() {
