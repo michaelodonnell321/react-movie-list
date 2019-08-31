@@ -21,8 +21,10 @@ function* rootSaga() {
 
 //LIST OF SAGAS
 function* getDetails(action) {
+    console.log('get details saga', action.payload);
+    let id = action.payload;
     try {
-        let response = yield axios.get(`/api/details`)
+        let response = yield axios.get(`/api/details/${id}`)
         console.log('saga get details response', response.data);
         yield put ({
             type: 'SET_DETAILS',

@@ -2,9 +2,13 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-router.get('/', (req, res) => {
-    const queryText = `SELECT * FROM movies`;
-    pool.query(queryText)
+router.get('/:id', (req, res) => {
+    console.log('req.params is', req.params);
+    let detailsId = req.params.id;
+    const queryText = `
+    SELECT * FROM "movies"
+    WHERE "id" = $1;`;
+    pool.query(queryText, [detailsId])
         .then((result) => {
             res.send(result.rows);
         })
