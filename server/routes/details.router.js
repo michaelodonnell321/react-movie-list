@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require('../modules/pool');
 
 router.get('/:id', (req, res) => {
+    //req.params is id of movie that was clicked to get details for
     console.log('req.params is', req.params);
     let detailsId = req.params.id;
     const queryText = `
