@@ -11,7 +11,7 @@ class Home extends Component {
 
     }
 
-    //dispatch to saga to call for movies
+    //dispatch to saga to call for movies on mount
     getMovies = () => {
         this.props.dispatch({
             type: 'GET_MOVIES'
@@ -30,6 +30,7 @@ class Home extends Component {
     render() {
         return (
             <div>
+                {/* map over data from movies reducer for full list of movies in DB */}
                 {this.props.reduxStore.movies.map(movie => {
                     return (
                         <div>

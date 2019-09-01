@@ -23,8 +23,11 @@ function* rootSaga() {
 //LIST OF SAGAS
 function* changeInfo(action) {
     console.log('change info saga', action.payload);
-    
+
 }
+
+// this saga gets the details for the single clicked movie by using ID from click handler
+// on the Details component
 function* getDetails(action) {
     console.log('get details saga', action.payload);
     let id = action.payload;
@@ -40,6 +43,7 @@ function* getDetails(action) {
     }
 }
 
+//this saga gets the full list of movies from the DB and sends to reducer to be sent to Home
 function* getMovies(action) {
     try {
         let response = yield axios.get(`/api/movies`)
@@ -58,7 +62,7 @@ const sagaMiddleware = createSagaMiddleware();
 //////////////////////////////////////////////
 
 // REDUCERS HERE
-// Used to store movies returned from the server
+// Used to store full list of movies returned from the DB on the Home page
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
@@ -68,6 +72,8 @@ const movies = (state = [], action) => {
     }
 }
 
+// used for details of what movie was clicked on Home page for Details
+// also used in Edit component
 const details = (state = [], action) => {
     switch (action.type) {
         case 'SET_DETAILS':
@@ -77,7 +83,7 @@ const details = (state = [], action) => {
     }
 }
 
-// Used to store the movie genres
+// Used to store the movie genres for Details component
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':

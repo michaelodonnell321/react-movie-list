@@ -25,15 +25,18 @@ class Details extends Component {
                 
             </div>
             <div>
+                {/* map over details reducer array to load details of the movie that was clicked */}
                 {this.props.details.map(movie => {
                     return (
                         <div>
+                            <button onClick={this.handleBackClick}>Back to List</button>
+                            <button onClick={this.handleEditClick}>Edit</button> 
                             <h3>{movie.title}</h3>
                             <img src={movie.poster} />
                             <p>{movie.description}</p>
+                            {/* genres is coming from GENRES reducer */}
                             <p>{movie.genres}</p>
-                            <button onClick={this.handleBackClick}>Back to List</button>
-                            <button onClick={this.handleEditClick}>Edit</button>
+                           
                         </div>
                     )
                 })}
