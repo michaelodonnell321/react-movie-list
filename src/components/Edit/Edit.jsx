@@ -4,7 +4,14 @@ import {connect} from 'react-redux';
 class Edit extends Component {
     state = {
         description: '',
-        name: ''
+        name: '',
+        id: 0
+    }
+    //id is held here
+    componentDidMount() {
+        this.setState({
+            id: this.props.idHolder
+        })
     }
 
     //TODO - combine these two change handlers
@@ -25,10 +32,22 @@ class Edit extends Component {
     // dispatch with ID from click from details reducer
     handleSaveChanges = (id) => {
         console.log('handle save changes clicked');
+        //return if description or name are blank, tell user to fill out both
+        if (this.state.description === '' || this.state.name === '') {
+            alert('Updated name and description needed to save');
+            return;
+        }
+        //dispatch to change_info with the state
         this.props.dispatch({
             type: 'CHANGE_INFO',
             payload: this.state
         })
+        //dispatch to get_details to re-load details page with new DB info
+        this.props.dispatch({
+            type: 'GET_DETAILS',
+            payload: id
+        })
+        this.props.history.push('/details')
     }
 
     //on cancel, reload details page, same dispatch as click on the details from home page
@@ -61,6 +80,8 @@ class Edit extends Component {
 const mapStateToProps = (reduxStore) => {
     return {
         details: reduxStore.details,
+        idHolder: reduxStore.idHolder
     }
 }
+
 export default connect(mapStateToProps)(Edit);

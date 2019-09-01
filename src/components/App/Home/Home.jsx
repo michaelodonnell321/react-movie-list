@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Button} from '@material-ui/core'
-
 
 class Home extends Component {
 
+    //get movies on load from DB
     componentDidMount() {
         console.log('component mount log');
         this.getMovies();
@@ -33,10 +32,10 @@ class Home extends Component {
                 {/* map over data from movies reducer for full list of movies in DB */}
                 {this.props.reduxStore.movies.map(movie => {
                     return (
-                        <div>
+                        <div key={movie.id}>
                             {/* {JSON.stringify(movie)} */}
                             <h3>{movie.title}</h3>
-                            <img src={movie.poster} onClick={() => this.movieClickHandler(movie.id)} />
+                            <img alt={movie.description} src={movie.poster} onClick={() => this.movieClickHandler(movie.id)} />
                             <p>{movie.description}</p>
                         </div>
                     )

@@ -10,6 +10,7 @@ class Details extends Component {
     }
 
     handleEditClick = (id) => {
+        //moves users to /edit on click
         console.log('in edit click');
         this.props.history.push('/edit');
     }
@@ -32,7 +33,7 @@ class Details extends Component {
                             <button onClick={this.handleBackClick}>Back to List</button>
                             <button onClick={this.handleEditClick}>Edit</button> 
                             <h3>{movie.title}</h3>
-                            <img src={movie.poster} />
+                            <img alt={movie.description} src={movie.poster} />
                             <p>{movie.description}</p>
                             {/* genres is coming from GENRES reducer */}
                             <p>{movie.genres}</p>

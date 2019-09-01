@@ -21,9 +21,21 @@ function* rootSaga() {
 }
 
 //LIST OF SAGAS
+//this saga gets the edits from the Edit component
 function* changeInfo(action) {
     console.log('change info saga', action.payload);
-
+    let id = action.payload.id
+    try {
+        let response = yield axios.put(`/api/edit/${id}`, action.payload)
+        console.log('saga change info response', response.data);
+        yield put ({
+            type: 'SET_DETAILS',
+            payload: response.data.id
+        })
+    }
+    catch(error) {
+        console.log('error in change info saga', error);
+    }
 }
 
 // this saga gets the details for the single clicked movie by using ID from click handler
@@ -37,6 +49,11 @@ function* getDetails(action) {
         yield put ({
             type: 'SET_DETAILS',
             payload: response.data
+        })
+        //ID is held in redux using this saga and attached reducer
+        yield put ({
+            type: 'SET_ID',
+            payload: id
         })
     } catch (error) {
         console.log('error in get details saga', error);
@@ -63,6 +80,16 @@ const sagaMiddleware = createSagaMiddleware();
 
 // REDUCERS HERE
 // Used to store full list of movies returned from the DB on the Home page
+//holds id in redux
+const idHolder = (state = 0, action) => {
+    switch (action.type) {
+        case 'SET_ID':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+//used for movies list on load of homepage
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
@@ -98,7 +125,8 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        details
+        details,
+        idHolder
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

@@ -2,18 +2,18 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-router.get('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     //req.params is id of movie that was clicked to get details for
     console.log('req.params is', req.params);
+    //rep.body has name and escription of movie from edit
+    console.log('req.body is', req.body)
     let detailsId = req.params.id;
+    let newName = req.body.name;
+    let newDescription = req.body.description;
     const queryText = `
-    SELECT movies.id, title, poster, array_agg(name)as genres, description
-    FROM "movies"
-    JOIN "movies_genres" ON "movies".id = "movies_genres".movies_id
-    JOIN "genres" ON "genres".id = "movies_genres".genres_id
-    WHERE movies.id = $1
-    GROUP BY "movies".id;`;
-    pool.query(queryText, [detailsId])
+    UPDATE "movies" SET "title"=$1, "description"=$2
+    WHERE id = $3;`;
+    pool.query(queryText, [newName, newDescription, detailsId])
         .then((result) => {
             res.send(result.rows);
         })
