@@ -7,6 +7,7 @@ class Edit extends Component {
         name: ''
     }
 
+    //TODO - combine these two change handlers
     handleDescriptionChange = (event) => {
         console.log(this.state.description);
         this.setState({
@@ -21,6 +22,7 @@ class Edit extends Component {
         })
     }
 
+    // dispatch with ID from click from details reducer
     handleSaveChanges = (id) => {
         console.log('handle save changes clicked');
         this.props.dispatch({
@@ -29,6 +31,7 @@ class Edit extends Component {
         })
     }
 
+    //on cancel, reload details page, same dispatch as click on the details from home page
     handleCancelChanges = (id) => {
         console.log('cancel changes clicked');
         this.props.dispatch({
@@ -42,8 +45,10 @@ class Edit extends Component {
         console.log('state is:', this.state);
         return (
             <div>
+                {/* use id from redux store details reducer to send to sagas to DB with cancel and save buttons */}
                 <button onClick={() => this.handleCancelChanges(this.props.details.id)}>Cancel Changes</button>
                 <button onClick={() => this.handleSaveChanges(this.props.details.id)}>Save Changes</button>
+                {/* save inputs in local state before dispatch on button click */}
                 <p>Change movie name:</p>
                 <input onChange={this.handleNameChange} />
                 <p>Change movie description:</p>
