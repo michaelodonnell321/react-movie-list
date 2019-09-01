@@ -9,11 +9,20 @@ class Details extends Component {
         this.props.history.push('/');
     }
 
+    handleEditClick = (id) => {
+        console.log('in edit click');
+        this.props.history.push('/edit');
+    }
+
     render() {
+        console.log('genre list is', this.props.genres);
         return (
             <div>
+                {/* {JSON.stringify(this.props.details[0])} */}
+                {/* why doesn't this work?  */}
+                {/* {JSON.stringify(this.props.details[0].title)} */}
             <div>
-                <button onClick={this.handleBackClick}>Back to List</button>
+                
             </div>
             <div>
                 {this.props.details.map(movie => {
@@ -22,6 +31,9 @@ class Details extends Component {
                             <h3>{movie.title}</h3>
                             <img src={movie.poster} />
                             <p>{movie.description}</p>
+                            <p>{movie.genres}</p>
+                            <button onClick={this.handleBackClick}>Back to List</button>
+                            <button onClick={this.handleEditClick}>Edit</button>
                         </div>
                     )
                 })}
@@ -34,7 +46,8 @@ class Details extends Component {
 
 const mapStateToProps = (reduxStore) => {
     return {
-        details: reduxStore.details
+        details: reduxStore.details,
+        genres: reduxStore.details.genres,
     }
 }
 

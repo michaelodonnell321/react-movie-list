@@ -17,9 +17,14 @@ function* rootSaga() {
     //take every's go here
     yield takeEvery('GET_MOVIES', getMovies)
     yield takeEvery('GET_DETAILS', getDetails)
+    yield takeEvery('CHANGE_INFO', changeInfo)
 }
 
 //LIST OF SAGAS
+function* changeInfo(action) {
+    console.log('change info saga', action.payload);
+    
+}
 function* getDetails(action) {
     console.log('get details saga', action.payload);
     let id = action.payload;
