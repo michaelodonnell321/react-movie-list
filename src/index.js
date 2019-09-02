@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
-import {takeEvery, put} from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 // Create the rootSaga generator function
@@ -28,12 +28,12 @@ function* changeInfo(action) {
     try {
         let response = yield axios.put(`/api/edit/${id}`, action.payload)
         console.log('saga change info response', response.data);
-        yield put ({
+        yield put({
             type: 'SET_DETAILS',
             payload: response.data.id
         })
     }
-    catch(error) {
+    catch (error) {
         console.log('error in change info saga', error);
     }
 }
@@ -46,12 +46,12 @@ function* getDetails(action) {
     try {
         let response = yield axios.get(`/api/details/${id}`)
         console.log('saga get details response', response.data);
-        yield put ({
+        yield put({
             type: 'SET_DETAILS',
             payload: response.data
         })
         //ID is held in redux using this saga and attached reducer
-        yield put ({
+        yield put({
             type: 'SET_ID',
             payload: id
         })
@@ -65,7 +65,7 @@ function* getMovies(action) {
     try {
         let response = yield axios.get(`/api/movies`)
         console.log('saga get movies response', response.data);
-        yield put ({
+        yield put({
             type: 'SET_MOVIES',
             payload: response.data
         })
@@ -135,6 +135,6 @@ const storeInstance = createStore(
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, 
+ReactDOM.render(<Provider store={storeInstance}><App /></Provider>,
     document.getElementById('root'));
 registerServiceWorker();
