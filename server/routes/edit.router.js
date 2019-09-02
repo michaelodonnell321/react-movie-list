@@ -7,6 +7,7 @@ router.put('/:id', (req, res) => {
     console.log('req.params is', req.params);
     //rep.body has name and escription of movie from edit
     console.log('req.body is', req.body)
+    //values for pool.query
     let detailsId = req.params.id;
     let newName = req.body.name;
     let newDescription = req.body.description;
