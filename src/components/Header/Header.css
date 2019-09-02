@@ -1,0 +1,21 @@
+.header {
+    background-image: linear-gradient(to right, lightblue, rgb(30, 197, 30));
+    height: 200px;
+    display:inline-flex;
+}
+.headerText {
+    font-size: 50px;
+    justify-content: center;
+    margin: 5px;
+}
+
+#servoQuote {
+    font-style: italic;
+    margin: 5px;
+}
+
+#servoCrow {
+    height: 100px;
+    width: 166px;
+    margin: 5px;
+}

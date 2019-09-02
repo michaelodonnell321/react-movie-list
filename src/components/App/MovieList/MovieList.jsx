@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import './MovieList.css';
 
 class Home extends Component {
 
@@ -28,14 +30,14 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
+            <div className="movieList">
                 {/* map over data from movies reducer for full list of movies in DB */}
                 {this.props.reduxStore.movies.map(movie => {
                     return (
                         <div key={movie.id}>
                             {/* {JSON.stringify(movie)} */}
                             <h3>{movie.title}</h3>
-                            <img alt={movie.description} src={movie.poster} onClick={() => this.movieClickHandler(movie.id)} />
+                            <img className ="posterImage" alt={movie.description} src={movie.poster} onClick={() => this.movieClickHandler(movie.id)} />
                             <p>{movie.description}</p>
                         </div>
                     )
